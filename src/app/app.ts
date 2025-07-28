@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,7 +14,15 @@ import { RouterOutlet } from '@angular/router';
 export class App {
   protected readonly title = signal('crud');
 
+  darkMode = signal(false);
+
   collapsed = signal(false);
 
   sidenavWidth = computed(() => (this.collapsed() ? '65px' : '250px'));
+
+  applyDarkMode = effect(() => {
+    const darkMode = this.darkMode();
+    document.body.classList.toggle('darkMode', darkMode);
+  })
+
 }
