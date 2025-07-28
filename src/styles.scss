@@ -35,8 +35,7 @@ html {
   @include mat.theme(
     (
       color: mat.$azure-palette,
-      typography: Roboto,
-      density: 0,
+      theme-type: light,
     )
   );
 }
