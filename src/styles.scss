@@ -41,6 +41,15 @@ html {
   );
 }
 
+.darkMode {
+  @include mat.theme(
+    (
+      primary: mat.$azure-palette,
+      theme-type: dark,
+    )
+  )
+}
+
 html,
 body {
   height: 100%;
