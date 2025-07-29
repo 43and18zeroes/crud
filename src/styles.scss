@@ -31,13 +31,22 @@
 
 @use "@angular/material" as mat;
 
+// html {
+//   @include mat.theme(
+//     (
+//       color: mat.$azure-palette,
+//       theme-type: light,
+//     )
+//   );
+// }
+
 html {
-  @include mat.theme(
-    (
-      color: mat.$azure-palette,
-      theme-type: light,
-    )
-  );
+  color-scheme: light dark;
+  @include mat.theme((
+    color: mat.$azure-palette,
+    typography: Roboto,
+    density: 0
+  ));
 }
 
 .darkMode {
