@@ -7,15 +7,23 @@
   <!-- <mat-slide-toggle [(ngModel)]="darkMode" class="mr-8" aria-label="Toggle dark mode">
 
   </mat-slide-toggle> -->
-  <mat-slide-toggle [checked]="darkMode()" (change)="darkMode.set($event.checked)" class="mr-8" aria-label="Toggle dark mode">
-
-</mat-slide-toggle>
+  <mat-slide-toggle
+    [checked]="darkMode()"
+    (change)="darkMode.set($event.checked)"
+    class="mr-8"
+    aria-label="Toggle dark mode"
+  >
+  </mat-slide-toggle>
   <mat-icon>bedtime</mat-icon>
+  <button mat-raised-button (click)="toggleTheme()">
+    Theme wechseln:
+    {{ (currentTheme$ | async) === "light" ? "Dunkel" : "Hell" }}
+  </button>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
     <!-- <app-custom-sidenav [collapsed]="collapsed()"></app-custom-sidenav> -->
-     <button matButton="elevated">Eintrag</button>
+    <button matButton="elevated">Eintrag</button>
   </mat-sidenav>
   <!-- <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()"> -->
   <!-- <router-outlet />
