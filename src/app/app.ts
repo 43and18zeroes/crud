@@ -25,19 +25,17 @@ export class App {
   sidenavWidth = computed(() => (this.collapsed() ? '65px' : '250px'));
 
   ngOnInit() {
-    const prefersDark =
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
+    this.initDarkModePreference();
+  }
 
+  private initDarkModePreference(): void {
+    const prefersDark = window.matchMedia?.(
+      '(prefers-color-scheme: dark)'
+    ).matches;
     if (prefersDark) {
       this.darkMode.set(true);
     }
   }
-
-  // applyDarkMode = effect(() => {
-  //   const darkMode = this.darkMode();
-  //   document.body.classList.toggle('darkMode', darkMode);
-  // });
 
   toggleDarkMode = effect(() => {
     if (this.darkMode()) {
@@ -47,5 +45,5 @@ export class App {
       document.body.classList.add('lightMode');
       document.body.classList.remove('darkMode');
     }
-  })
+  });
 }
