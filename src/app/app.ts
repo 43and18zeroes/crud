@@ -30,9 +30,7 @@ export class App {
       window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     if (prefersDark) {
-      console.log('Der Browser ist im Dunkelmodus.');
-    } else {
-      console.log('Der Browser ist im Hellmodus (oder hat keine Präferenz).');
+      this.darkMode.set(true);
     }
   }
 

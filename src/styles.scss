@@ -11,6 +11,15 @@ html {
 }
 
 .darkMode {
+  color-scheme: dark;
+  @include mat.theme((
+    color: mat.$azure-palette,
+    typography: Roboto,
+    density: 0
+  ));
+}
+
+.lightMode {
   color-scheme: light;
   @include mat.theme((
     color: mat.$azure-palette,
