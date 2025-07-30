@@ -2,20 +2,19 @@
   <button mat-icon-button (click)="collapsed.set(!collapsed())">
     <mat-icon>menu</mat-icon>
   </button>
-  <div class="flex-strech"></div>
-  <mat-icon class="mr-8">brightness_5</mat-icon>
-  <!-- <mat-slide-toggle [(ngModel)]="darkMode" class="mr-8" aria-label="Toggle dark mode">
-
-  </mat-slide-toggle> -->
-  <mat-slide-toggle [checked]="darkMode()" (change)="darkMode.set($event.checked)" class="mr-8" aria-label="Toggle dark mode">
-
-</mat-slide-toggle>
-  <mat-icon>bedtime</mat-icon>
+  <button
+    mat-icon-button
+    (click)="darkMode.set(!darkMode())"
+    class="mr-8"
+    aria-label="Toggle dark mode"
+  >
+    <mat-icon>{{ darkMode() ? "light_mode" : "bedtime" }}</mat-icon>
+  </button>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
     <!-- <app-custom-sidenav [collapsed]="collapsed()"></app-custom-sidenav> -->
-     <button matButton="elevated">Eintrag</button>
+    <button matButton="elevated">Eintrag</button>
   </mat-sidenav>
   <!-- <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()"> -->
   <!-- <router-outlet />
