@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     MatToolbarModule,
     MatIconModule,
@@ -25,30 +26,33 @@ export class App {
   sidenavWidth = computed(() => (this.collapsed() ? '65px' : '250px'));
 
   ngOnInit() {
-    this.initDarkModePreference();
-    this.initDarkModeChange();
+    this.loadDarkModeFromStorageOrSystem();
+    this.listenToSystemPreferenceChanges();
   }
 
-  private initDarkModePreference(): void {
-    const prefersDark = window.matchMedia?.(
-      '(prefers-color-scheme: dark)'
-    ).matches;
-    if (prefersDark) {
-      this.darkMode.set(true);
+  private loadDarkModeFromStorageOrSystem(): void {
+    const saved = localStorage.getItem('darkMode');
+    if (saved !== null) {
+      this.darkMode.set(saved === 'true');
+    } else {
+      const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+      this.darkMode.set(prefersDark);
     }
   }
 
-  private initDarkModeChange(): void {
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (e) => {
+  private listenToSystemPreferenceChanges(): void {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      const saved = localStorage.getItem('darkMode');
+      if (saved === null) {
         this.darkMode.set(e.matches);
-      });
+      }
+    });
   }
 
   toggleDarkMode = effect(() => {
     const dark = this.darkMode();
     document.body.classList.toggle('darkMode', dark);
     document.body.classList.toggle('lightMode', !dark);
+    localStorage.setItem('darkMode', dark.toString());
   });
 }
