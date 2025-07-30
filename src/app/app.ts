@@ -26,6 +26,7 @@ export class App {
 
   ngOnInit() {
     this.initDarkModePreference();
+    this.initDarkModeChange();
   }
 
   private initDarkModePreference(): void {
@@ -37,13 +38,17 @@ export class App {
     }
   }
 
+  private initDarkModeChange(): void {
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (e) => {
+        this.darkMode.set(e.matches);
+      });
+  }
+
   toggleDarkMode = effect(() => {
-    if (this.darkMode()) {
-      document.body.classList.add('darkMode');
-      document.body.classList.remove('lightMode');
-    } else {
-      document.body.classList.add('lightMode');
-      document.body.classList.remove('darkMode');
-    }
+    const dark = this.darkMode();
+    document.body.classList.toggle('darkMode', dark);
+    document.body.classList.toggle('lightMode', !dark);
   });
 }
